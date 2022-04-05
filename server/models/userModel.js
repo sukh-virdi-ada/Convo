@@ -19,6 +19,13 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 8,
   },
+  type: {
+    type: String,
+    required: true,
+    min: 3,
+    max: 20,
+    unique: false,
+  },
   isAvatarImageSet: {
     type: Boolean,
     default: false,

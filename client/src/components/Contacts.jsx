@@ -23,9 +23,20 @@ export default function Contacts({ contacts, changeChat }) {
     <>
       {currentUserImage && currentUserImage && (
         <Container>
-          <div className="brand">
-            <img src={Logo} alt="logo" />
-            <h3>convo</h3>
+           <div className="current-user">
+            
+            <div className="username">
+              <h2>{currentUserName}</h2>
+            </div>
+            <div className="avatar">
+            <Link to="/UserProfile">
+              <img
+                src={`data:image/svg+xml;base64,${currentUserImage}`}
+                alt="avatar"
+                onclick="location.href = ../pages/UserProfile.js"
+              />
+              </Link>
+            </div>
           </div>
           <div className="contacts">
             {contacts.map((contact, index) => {
@@ -37,33 +48,23 @@ export default function Contacts({ contacts, changeChat }) {
                   }`}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
+                  
+                  <div className="username">
+                    <h3>{contact.type === "standard"
+                    ?contact.email
+                    :contact.username}</h3>
+                  </div>
                   <div className="avatar">
                     <img
                       src={`data:image/svg+xml;base64,${contact.avatarImage}`}
                       alt=""
                     />
                   </div>
-                  <div className="username">
-                    <h3>{contact.username}</h3>
-                  </div>
                 </div>
               );
             })}
           </div>
-          <div className="current-user">
-            <div className="avatar">
-            <Link to="/UserProfile">
-              <img
-                src={`data:image/svg+xml;base64,${currentUserImage}`}
-                alt="avatar"
-                onclick="location.href = ../pages/UserProfile.js"
-              />
-              </Link>
-            </div>
-            <div className="username">
-              <h2>{currentUserName}</h2>
-            </div>
-          </div>
+         
         </Container>
       )}
     </>
@@ -71,7 +72,7 @@ export default function Contacts({ contacts, changeChat }) {
 }
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 75% 15%;
+  grid-template-rows: 15% 85%;
   overflow: hidden;
   background-color: #080420;
   .brand {
@@ -109,6 +110,7 @@ const Container = styled.div`
       border-radius: 0.2rem;
       padding: 0.4rem;
       display: flex;
+      justify-content: space-between;        
       gap: 1rem;
       align-items: center;
       transition: 0.5s ease-in-out;
@@ -120,6 +122,7 @@ const Container = styled.div`
       .username {
         h3 {
           color: white;
+          padding-left 10px;
         }
       }
     }

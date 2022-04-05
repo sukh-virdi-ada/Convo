@@ -49,12 +49,13 @@ export default function Chat() {
     <>
       <Container>
         <div className="container">
-          <Contacts contacts={contacts} changeChat={handleChatChange} />
+          
           {currentChat === undefined ? (
             <Welcome />
           ) : (
             <ChatContainer currentChat={currentChat} socket={socket} />
           )}
+          <Contacts contacts={contacts} changeChat={handleChatChange} />
         </div>
       </Container>
     </>
@@ -75,9 +76,9 @@ const Container = styled.div`
     width: 85vw;
     background-color: #00000076;
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 75% 25%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
-      grid-template-columns: 35% 65%;
+      grid-template-columns: 65% 35%;
     }
   }
 `;

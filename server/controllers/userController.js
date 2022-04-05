@@ -31,6 +31,7 @@ module.exports.register = async (req, res, next) => {
       email,
       username,
       password: hashedPassword,
+      type: "standard",
     });
     delete user.password;
     return res.json({ status: true, user });
@@ -44,6 +45,7 @@ module.exports.getAllUsers = async (req, res, next) => {
     const users = await User.find({ _id: { $ne: req.params.id } }).select([
       "email",
       "username",
+      "type",
       "avatarImage",
       "_id",
     ]);
