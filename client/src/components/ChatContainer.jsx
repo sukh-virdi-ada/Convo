@@ -116,6 +116,7 @@ const Container = styled.div`
     grid-template-rows: 15% 70% 15%;
   }
   .chat-header {
+    background-color: #0d0d30;
     display: flex;
     justify-content: space-between;
     align-items: center;

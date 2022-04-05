@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../assets/logo.svg";
+import { IoIosPersonAdd } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 export default function Contacts({ contacts, changeChat }) {
@@ -24,7 +25,7 @@ export default function Contacts({ contacts, changeChat }) {
       {currentUserImage && currentUserImage && (
         <Container>
            <div className="current-user">
-            
+            <button><IoIosPersonAdd/></button>
             <div className="username">
               <h2>{currentUserName}</h2>
             </div>
@@ -72,7 +73,7 @@ export default function Contacts({ contacts, changeChat }) {
 }
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 15% 85%;
+  grid-template-rows: 10% 90%;
   overflow: hidden;
   background-color: #080420;
   .brand {
@@ -88,6 +89,28 @@ const Container = styled.div`
       text-transform: uppercase;
     }
   }
+
+  button {
+    padding: 0.3rem 1rem;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #9a86f3;
+    border: none;
+    @media screen and (min-width: 720px) and (max-width: 1080px) {
+      padding: 0.3rem 1rem;
+      svg {
+        font-size: 1rem;
+      }
+    }
+    svg {
+      font-size: 2rem;
+      color: white;
+    }
+  }
+
+
   .contacts {
     display: flex;
     flex-direction: column;
