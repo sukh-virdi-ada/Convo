@@ -48,6 +48,7 @@ export default function Welcome() {
 
 const Container = styled.div`
   display: flex;
+  background-color: #0a0a13;
   justify-content: center;
   align-items: center;
   color: white;
@@ -70,6 +71,8 @@ const Container = styled.div`
     grid-template-rows: 45% 45%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
       grid-template-columns: 50% 50%;
+      grid-template-rows: 35% 35%;
+      
     }
   }
 `;

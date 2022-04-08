@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Logo from "../assets/logo.svg";
 import { IoIosPersonAdd } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 export default function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
+  const [currentUserType, setCurrentUserType] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
   useEffect(async () => {
     const data = await JSON.parse(
       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
     );
+    setCurrentUserType(data.type)
     setCurrentUserName(data.username);
     setCurrentUserImage(data.avatarImage);
   }, []);
@@ -65,7 +66,14 @@ export default function Contacts({ contacts, changeChat }) {
               );
             })}
           </div>
+
+          {currentUserType === "standard"
+          ? <div className="upgrade-account">
+          <p>Upgrade My account to Convo Premium</p>
+        </div>
+        :<div></div>}
          
+
         </Container>
       )}
     </>
@@ -73,7 +81,7 @@ export default function Contacts({ contacts, changeChat }) {
 }
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: 10% 80% 10%;
   overflow: hidden;
   background-color: #080420;
   .brand {
@@ -89,7 +97,6 @@ const Container = styled.div`
       text-transform: uppercase;
     }
   }
-
   button {
     padding: 0.3rem 1rem;
     border-radius: 2rem;
@@ -109,8 +116,18 @@ const Container = styled.div`
       color: white;
     }
   }
-
-
+  .upgrade-account {
+    background-color: #0d0d30;
+    color: white;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 1rem;
+    text-decoration: underline;
+    &:hover {
+      background-color: #9a86f3;
+    }
+  }
   .contacts {
     display: flex;
     flex-direction: column;
@@ -153,7 +170,6 @@ const Container = styled.div`
       background-color: #9a86f3;
     }
   }
-
   .current-user {
     background-color: #0d0d30;
     display: flex;
