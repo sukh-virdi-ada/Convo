@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { IoIosArrowBack } from "react-icons/io";
 import { IoIosSave } from "react-icons/io";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
+import Logo from "../assets/logo.svg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { loginRoute } from "../utils/APIRoutes";
 
-export default function UserDetails() {
-    const [currentUser, setCurrentUser] = useState("");
+export default function UserDetail() {
+  const navigate = useNavigate();
+
+  const [currentUser, setCurrentUser] = useState("");
     useEffect(async () => {
       setCurrentUser(
         await JSON.parse(
@@ -11,29 +20,32 @@ export default function UserDetails() {
         )
       );
     }, []);
-    return (
-        <FormContainer>
-        <form>
-        <h1> Account Settings</h1>
+
+    const handleBack = () =>{
+      navigate("/");
+    }
+  
+  return (
+    <>
+      <FormContainer>
+      <form>
+        
         <span align="center">
+          <h1>Account Settings</h1>
+          <br/> <br/> <br/>
             <div className="heading">
-                <br/> 
-                <br/> 
-                <br/>               
                 <p>Convo Account Type</p>
                 <br/> 
                 <div className="data">{currentUser.type}</div>
                 </div>
             <div className="heading">
                 <br/> 
-                <br/> 
-                <br/>               
+                <br/>             
                 <p>Username</p>
                 <br/> 
                 <input type="text" id="username" name="username" placeholder="Enter a new username" value={currentUser.username}/>
             </div>
-            <div className="heading">                
-                <br/> 
+            <div className="heading">   
                 <br/> 
                 <br/>
                 <p>Email Address</p> 
@@ -41,7 +53,6 @@ export default function UserDetails() {
                 <div className="data" contentEditable="true">{currentUser.email}</div>
                 </div>
             <div className="heading">
-                <br/> 
                 <br/> 
                 <br/>
                 <p>Avatar</p>
@@ -51,66 +62,84 @@ export default function UserDetails() {
                   alt="avatar"
                 />
                 </div>
-                <button><IoIosSave/></button>
+                <br/> 
+                <br/> 
+                <button onClick={handleBack}><IoIosArrowBack/></button>
+                <button ><IoIosSave/></button>
         </span>
-        <div className="settings">test</div>
         </form>
-        </FormContainer>
-    );
+      </FormContainer>
+    </>
+  );
+}
+
+const FormContainer = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  background-color: #131324;
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    img {
+      height: 5rem;
+    }
+    h1 {
+      color: white;
+      text-transform: uppercase;
+    }
   }
 
-  const FormContainer = styled.div`
-  height: 85vh;
-  width: 85vw;
-  align-items: center;
-  flex-direction: column;
-  background-color: #00000076;
-  display: flex;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: #00000076;
+    border-radius: 2rem;
+    padding: 5rem;
+  }
+  input {
+    background-color: transparent;
+    padding: 1rem;
+    border: 0.1rem solid #4e0eff;
+    border-radius: 0.4rem;
+    color: white;
+    width: 100%;
+    font-size: 1rem;
+    &:focus {
+      border: 0.1rem solid #997af0;
+      outline: none;
+    }
+  }
+  button {
+    background-color: #4e0eff;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-right: 50px;
+    margin-left: 50px;
+    &:hover {
+      background-color: #4e0eff;
+    }
+  }
   span {
     color: white;
     text-transform: uppercase;
-    width:237.3px;
-    height:32px;
-    display:table;
-    margin-left: auto;
-    margin-right: auto;
-    }
-    h1 {
-      align: center;
-      color: white
-    };
-  
-  .settings {
-    width: 200px;
-    color: white;
-  }
-  .username {
-    font-weight: bold;    
-  }
-  .data {
-    font-weight: normal;    
-  }
-  .heading {
-    font-weight: bold;    
-  }
-  button {
-    padding: 0.3rem 1rem;
-    border-radius: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #9a86f3;
-    border: none;
-    @media screen and (min-width: 720px) and (max-width: 1080px) {
-      padding: 0.3rem 1rem;
-      svg {
-        font-size: 1rem;
-      }
-    }
-    svg {
-      font-size: 2rem;
-      color: white;
+    a {
+      color: #4e0eff;
+      text-decoration: none;
+      font-weight: bold;
     }
   }
-  
-`
+`;
