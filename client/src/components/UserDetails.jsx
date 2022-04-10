@@ -43,7 +43,9 @@ export default function UserDetail() {
                 <br/>             
                 <p>Username</p>
                 <br/> 
-                <input type="text" id="username" name="username" placeholder="Enter a new username" value={currentUser.username}/>
+                {currentUser.type === "standard"
+                ?<div className="data">{currentUser.username}</div>
+              :<input type="text" id="username" name="username" placeholder="Enter a new username" value={currentUser.username}/>}
             </div>
             <div className="heading">   
                 <br/> 
